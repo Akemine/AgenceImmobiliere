@@ -1,0 +1,29 @@
+.text-green {
+    color: #59960c;
+}
+
+.text-red {
+    color: #e2407a;
+}
+
+.text-grey {
+    color: #8f9498 !important;
+}
+
+.verticaltext_content {
+    -webkit-transform: rotate(-10deg);
+}
+
+.bg-green-site {
+    background-color: #59960c !important;
+}
+
+.bg-grey-site {
+    background-color: #393e44 !important;
+}
+
+/*
+* {
+
+    font-family: 'Indie Flower', cursive;
+}*/
