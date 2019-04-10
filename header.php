@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="css/css.css">
     <link rel="stylesheet" href="vendors/fontawesome/css/all.css">
+    <link rel="stylesheet" href="vendors/datatables/datatables.min.css">
     <title>Agence immobilière</title>
-    <?php include_once 'functions.php';?>
+    <?php include_once 'functions.php';
+    include_once 'database/connection.php';
+    include_once 'connectionPDO.php';
+    ?>
 </head>

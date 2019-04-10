@@ -33,6 +33,7 @@
         <script src="vendors/jquery/jquery-3.3.1.min.js"></script>
         <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="js/navbar.js"></script>
+        <script src="js/index.js"></script>
     </footer>
 </section>
 </body>
