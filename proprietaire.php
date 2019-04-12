@@ -6,7 +6,7 @@
     </header>
     <section class="container">
         <h1 class="mt-3">Liste des propriétaires (<?php echo count($proprietaires); ?>)</h1>
-        <table id="unTab" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th>Nom</th>
