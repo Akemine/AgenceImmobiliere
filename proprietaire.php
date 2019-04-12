@@ -21,7 +21,6 @@
             foreach ($proprietaires as $proprietaire) {
                 ?>
                 <tr>
-
                     <td style="color : darkblue;" class="font-weight-bold"><a
                                 href='/agenceImmobiliere/detailProprio.php?id=<?php echo $proprietaire['numeroproprietaire']; ?>'>
                             <?php echo $proprietaire['nomproprietaire'] ?></a></td>
@@ -35,6 +34,14 @@
             ?>
             </tbody>
         </table>
+        <?php
+        $total = count($totalproprietaires) / 10;
+        for ($i = 0; $i <= $total; $i++) {
+            ?>
+            <a href="/agenceImmobiliere/proprietaire?page=<?php echo $i ?>">
+                <button id=""><?php echo $i ?></button>
+            </a>
+        <?php } ?>
         <footer>
             <?php include_once 'footer.php'; ?>
         </footer>

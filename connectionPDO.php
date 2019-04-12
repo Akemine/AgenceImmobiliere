@@ -19,10 +19,33 @@ $requete = $pdo->query($sql);
 $biens = $requete->fetchAll();
 
 // Requete des propriétaires
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+
+
+    $sql = "select numeroproprietaire, nomproprietaire, prenomproprietaire, titre, telephonemobile, telephonepersonnel from proprietaires
+order by nomproprietaire asc
+limit 10 OFFSET 10*$page";
+
+
+
+    $requete = $pdo->query($sql);
+    $proprietaires = $requete->fetchAll();
+}
+
+
+
+else {
+    $sql = 'select numeroproprietaire, nomproprietaire, prenomproprietaire, titre, telephonemobile, telephonepersonnel from proprietaires
+order by nomproprietaire asc
+limit 10';
+    $requete = $pdo->query($sql);
+    $proprietaires = $requete->fetchAll();
+}
 $sql = 'select numeroproprietaire, nomproprietaire, prenomproprietaire, titre, telephonemobile, telephonepersonnel from proprietaires
-ORDER BY nomproprietaire ASC';
+order by nomproprietaire asc';
 $requete = $pdo->query($sql);
-$proprietaires = $requete->fetchAll();
+$totalproprietaires = $requete->fetchAll();
 //-------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------//
 //-------------------------------------------------------------------------------------//
@@ -66,52 +89,53 @@ $codeville = '';
 $codebien = '';
 $codetransaction = '';
 
-    if (isset($_GET['idTransactions'])) {
-        $codetransaction = $_GET['idTransactions'];
-        $where = "where t2.codetransaction = '$codetransaction'";
-        $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
-from proprietaires
-         inner join biens b on proprietaires.numeroproprietaire = b.numeroproprietaire
-         inner join villes v on b.codeville = v.codeville
-         inner join typesbiens t on b.codebien = t.codebien
-         inner join typestransactions t2 on b.codetransaction = t2.codetransaction
-        $where
-order by montant desc";
-        $requete = $pdo->query($sql);
-        $biens = $requete->fetchAll();
-    }
+if (isset($_GET['idTransactions'])) {
+    $codetransaction = $_GET['idTransactions'];
+    $where = "where t2.codetransaction = '$codetransaction'";
 
-
-    elseif (isset($_GET['idVille'])) {
-        $codeville = $_GET['idVille'];
-
-        $where = "where b.codeville = $codeville";
-        $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
-from proprietaires
-         inner join biens b on proprietaires.numeroproprietaire = b.numeroproprietaire
-         inner join villes v on b.codeville = v.codeville
-         inner join typesbiens t on b.codebien = t.codebien
-         inner join typestransactions t2 on b.codetransaction = t2.codetransaction
-        $where
-order by montant desc";
-        $requete = $pdo->query($sql);
-        $biens = $requete->fetchAll();
-    }
-
-    elseif (isset($_GET['idBiens'])) {
-        $codebien = $_GET['idBiens'];
-        $where = "where b.codebien = '$codebien'";
-        $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
+    $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
 from proprietaires
          inner join biens b on proprietaires.numeroproprietaire = b.numeroproprietaire
          inner join villes v on b.codeville = v.codeville
          inner join typesbiens t on b.codebien = t.codebien
          inner join typestransactions t2 on b.codetransaction = t2.codetransaction
         $where";
-        $requete = $pdo->query($sql);
-        $biens = $requete->fetchAll();
-    }
- else {
+    $requete = $pdo->query($sql);
+    $biens = $requete->fetchAll();
+}
+
+elseif (isset($_GET['idVille'])) {
+    $codeville = $_GET['idVille'];
+    $where = "where b.codeville = $codeville";
+
+    $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
+from proprietaires
+         inner join biens b on proprietaires.numeroproprietaire = b.numeroproprietaire
+         inner join villes v on b.codeville = v.codeville
+         inner join typesbiens t on b.codebien = t.codebien
+         inner join typestransactions t2 on b.codetransaction = t2.codetransaction
+        $where";
+    $requete = $pdo->query($sql);
+    $biens = $requete->fetchAll();
+}
+
+elseif (isset($_GET['idBiens'])) {
+    $codebien = $_GET['idBiens'];
+    $where = "where b.codebien = '$codebien'";
+
+    $sql = "select b.adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
+from proprietaires
+         inner join biens b on proprietaires.numeroproprietaire = b.numeroproprietaire
+         inner join villes v on b.codeville = v.codeville
+         inner join typesbiens t on b.codebien = t.codebien
+         inner join typestransactions t2 on b.codetransaction = t2.codetransaction
+        $where";
+    $requete = $pdo->query($sql);
+    $biens = $requete->fetchAll();
+}
+
+
+else {
     $sql = 'select b . adresse1, codepostal, nomville, pieces, intituletransaction, intitulebien, montant
 from proprietaires
          inner join biens b on proprietaires . numeroproprietaire = b . numeroproprietaire

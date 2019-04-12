@@ -27,3 +27,16 @@ else
     echo ''; ?>"
 <?php
 }
+
+
+function getLink($param, $value)
+{
+    global $tri;
+    $tabhref = $tri;
+    $tabhref[$param] = $value;
+    $href = 'biens.php?';
+    foreach($tabhref as $key => $val){
+        $href .= "$key=$val&";
+    }
+    return $href;
+}
